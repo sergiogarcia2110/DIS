@@ -45,4 +45,12 @@ public class StudentService {
         client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    public void exportStudentsToPDF() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BACKEND_URL + "/students/exportpdf"))
+                .GET()
+                .build();
+        client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
 }

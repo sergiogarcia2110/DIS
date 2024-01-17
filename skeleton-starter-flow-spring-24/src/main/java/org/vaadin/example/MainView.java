@@ -111,6 +111,8 @@ public class MainView extends VerticalLayout {
             add(addButton);
             Button exportButton = new Button("Export to CSV", e -> exportStudents());
             add(exportButton);
+            Button exportToPdfButton = new Button("Export to PDF", e -> exportStudentsToPDF());
+            add(exportToPdfButton);
         }
         
         private void refreshGrid() {
@@ -127,5 +129,10 @@ public class MainView extends VerticalLayout {
                 UI.getCurrent().getPage().open("http://localhost:8081/students/export", "_blank");
 
         }
-        
+
+        // Método para manejar la exportación a PDF
+        private void exportStudentsToPDF() {
+            UI.getCurrent().getPage().open("http://localhost:8081/students/exportpdf", "_blank");
+        }
+                
 }        

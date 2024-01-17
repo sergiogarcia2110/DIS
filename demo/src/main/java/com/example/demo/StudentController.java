@@ -19,6 +19,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
 @RestController
 public class StudentController {
     private static String projectRoot = System.getProperty("user.dir");
@@ -68,6 +72,27 @@ public class StudentController {
                     student.getUuid()
                 });
             }
+        }
+    }
+
+    @GetMapping("/students/exportpdf")
+    public void exportStudentsToPDF(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=students.pdf");
+        
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, response.getOutputStream());
+            document.open();
+            List<Student> students = getStudentsList();
+            for (Student student : students) {
+                document.add(new Paragraph("Name: " + student.getFirstName() + ", Last Name: " + student.getLastName() + 
+                ", Date of Birth: "+ student.getDateOfBirth().toString() + ", Gender: " + student.getGender() + ", UUID: " + student.getUuid()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            document.close();
         }
     }
 
