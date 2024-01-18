@@ -75,7 +75,7 @@ public class MainView extends VerticalLayout {
             newStudent.setLastName(lastNameField.getValue());
             newStudent.setDateOfBirth(dateOfBirthField.getValue().toString());
             newStudent.setGender(genderField.getValue());
-            newStudent.setUuid(UUID.randomUUID().toString());
+            newStudent.setUuid(uuidField.getValue());
 
             try {
                 StudentService studentService = new StudentService();

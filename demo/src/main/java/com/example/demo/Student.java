@@ -1,4 +1,5 @@
 package com.example.demo;
+import java.util.UUID;
 
 public class Student {
     private String firstName;
@@ -6,6 +7,10 @@ public class Student {
     private String dateOfBirth;
     private String gender;
     private String uuid;
+
+    public Student() {
+        this.uuid = UUID.randomUUID().toString();
+    }
 
     public String getFirstName() {
         return firstName;
